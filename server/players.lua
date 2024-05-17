@@ -1,3 +1,5 @@
+GlobalState.BlipList = {}
+
 local function getVehicles(cid)
     local result = MySQL.query.await(
     'SELECT vehicle, plate, fuel, engine, body FROM player_vehicles WHERE citizenid = ?', { cid })
@@ -148,4 +150,23 @@ RegisterNetEvent("ps-adminmenu:server:RemoveStress", function(data, selectedData
     TriggerClientEvent('ps-adminmenu:client:removeStress', targetId)
 
     QBCore.Functions.Notify(tPlayer.PlayerData.source, locale("removed_stress_player"), 'success', 5000)
+end)
+
+lib.callback.register('ps-adminmenu:callback:PrepareBlips', function(source, action)
+    local src = source
+    local ped = GetPlayerPed(src)
+    local temp = GlobalState.BlipList -- temp table to edit
+    if action == 'add' then
+        if table.contains(temp, ped) then return end -- skip if already exists
+        temp[src]=ped
+        lib.print.debug('New list after adding:')
+        lib.print.debug(temp)
+    elseif action == 'remove' then
+        if not table.contains(temp, ped) then return end -- skip if already doesn't exist
+        temp[src]=nil
+        lib.print.debug('New list after removing:')
+        lib.print.debug(temp)
+    end
+    GlobalState.BlipList = temp
+    return true
 end)

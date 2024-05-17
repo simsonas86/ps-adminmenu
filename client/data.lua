@@ -61,7 +61,7 @@ local function GetGangs()
     return gangs
 end
 
--- Returns a list of locations from QBCore.Shared.Loactions
+-- Returns a list of locations from QBCore.Shared.Locations
 local function GetLocations()
     local locations = {}
 

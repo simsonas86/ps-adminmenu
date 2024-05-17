@@ -88,11 +88,13 @@ local function UpdateBlipsAndNames(players)
         end
 
         if ShowBlips then
+            if ped == PlayerPedId() then goto skip end -- skip self
             if not DoesBlipExist(Blip) then
                 Blip = AddBlipForEntity(ped)
+
                 ShowHeadingIndicatorOnBlip(Blip, true)
                 SetBlipCategory(Blip, 7)
-            else
+                else
                 local veh = GetVehiclePedIsIn(ped, false)
                 local classveh = GetVehicleClass(veh)
                 local modelveh = GetEntityModel(veh)
@@ -132,6 +134,7 @@ local function UpdateBlipsAndNames(players)
                     ShowHeadingIndicatorOnBlip(Blip, true)
                 end
             end
+            ::skip::
         end
     end
 end
@@ -179,4 +182,21 @@ end)
 -- Remove Stress
 RegisterNetEvent('ps-adminmenu:client:removeStress', function(data)
     TriggerServerEvent('hud:server:RelieveStress', 100)
+end)
+
+-- Blip prep
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    lib.callback('ps-adminmenu:callback:PrepareBlips', false, function(success)
+        if not success then return end
+    end, 'add')
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
+    lib.callback('ps-adminmenu:callback:PrepareBlips', false, function(success)
+        if not success then return end
+    end, 'remove')
+end)
+
+AddStateBagChangeHandler('BlipList', 'global', function()
+    preparePlayers()
 end)
