@@ -1,12 +1,6 @@
 -- Admin Car
-RegisterNetEvent('ps-adminmenu:server:SaveCar', function(data, mods, vehicle, _, plate)
+RegisterNetEvent('ps-adminmenu:server:SaveCar', function(mods, vehicle, _, plate)
     local src = source
-    
-    if not data or not CheckPerms(src, data.perms) then
-        QBCore.Functions.Notify(src, locale("no_perms"), "error", 5000)
-        return
-    end
-    
     local Player = QBCore.Functions.GetPlayer(src)
     local result = MySQL.query.await('SELECT plate FROM player_vehicles WHERE plate = ?', { plate })
 
