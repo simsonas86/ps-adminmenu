@@ -200,7 +200,6 @@ local function ToggleNoclip()
 end
 
 RegisterNetEvent('ps-adminmenu:client:ToggleNoClip', function()
-    if not CheckPerms(Config.Actions["noclip"].perms) then return end
     ToggleNoclip()
 end)
 
