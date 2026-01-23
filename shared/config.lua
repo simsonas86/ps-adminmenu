@@ -1,5 +1,6 @@
 Config = Config or {}
 
+Config.Core = "qb-core"        -- "qb-core" or "qbx_core"
 Config.Fuel = "ps-fuel"        -- "ps-fuel", "LegacyFuel", "ox_fuel"
 Config.ResourcePerms = 'admin' -- permission to control resource(start stop restart)
 Config.ShowCommandsPerms = 'admin' -- permission to show all commands

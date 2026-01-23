@@ -122,6 +122,11 @@ RegisterNetEvent("ps-adminmenu:server:SetVehicleState", function(data, selectedD
 end)
 
 -- Change Plate
+local function tableExists(tableName)
+    local result = MySQL.query.await('SELECT 1 FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = ?', { tableName })
+    return result and result[1] ~= nil
+end
+
 RegisterNetEvent('ps-adminmenu:server:ChangePlate', function(newPlate, currentPlate)
     local newPlate = newPlate:upper()
 
@@ -130,8 +135,12 @@ RegisterNetEvent('ps-adminmenu:server:ChangePlate', function(newPlate, currentPl
     end
 
     MySQL.Sync.execute('UPDATE player_vehicles SET plate = ? WHERE plate = ?', { newPlate, currentPlate })
-    MySQL.Sync.execute('UPDATE trunkitems SET plate = ? WHERE plate = ?', { newPlate, currentPlate })
-    MySQL.Sync.execute('UPDATE gloveboxitems SET plate = ? WHERE plate = ?', { newPlate, currentPlate })
+    if tableExists('trunkitems') then
+        MySQL.Sync.execute('UPDATE trunkitems SET plate = ? WHERE plate = ?', { newPlate, currentPlate })
+    end
+    if tableExists('gloveboxitems') then
+        MySQL.Sync.execute('UPDATE gloveboxitems SET plate = ? WHERE plate = ?', { newPlate, currentPlate })
+    end
 end)
 
 lib.callback.register('ps-adminmenu:server:GetVehicleByPlate', function(source, plate)

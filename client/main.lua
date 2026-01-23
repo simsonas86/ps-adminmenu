@@ -1,4 +1,5 @@
-QBCore = exports['qb-core']:GetCoreObject()
+local coreResource = Config.Core == "qbx_core" and "qb-core" or Config.Core
+QBCore = exports[coreResource]:GetCoreObject()
 PlayerData = {}
 
 -- Functions
