@@ -3,16 +3,46 @@ RegisterNetEvent('ps-adminmenu:server:BanPlayer', function(data, selectedData)
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(source, data.perms) then return end
 
-    local player = selectedData["Player"].value
-    local reason = selectedData["Reason"].value or ""
-    local time = selectedData["Duration"].value
+    local player = tonumber(selectedData["Player"] and selectedData["Player"].value)
+    local reason = (selectedData["Reason"] and selectedData["Reason"].value) or ""
+    local time = tonumber(selectedData["Duration"] and selectedData["Duration"].value)
+
+    if not player then
+        QBCore.Functions.Notify(source, locale("not_online"), 'error', 7500)
+        return
+    end
+
+    if not time then
+        QBCore.Functions.Notify(source, locale("empty_input"), 'error', 7500)
+        return
+    end
 
     local banTime = tonumber(os.time() + time)
+    local expire = banTime
+
+    if time == 2147483647 or banTime > 2147483647 then
+        expire = 2147483647
+    end
+
     local timeTable = os.date('*t', banTime)
 
-    MySQL.insert('INSERT INTO bans (name, license, discord, ip, reason, expire, bannedby) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        { GetPlayerName(player), QBCore.Functions.GetIdentifier(player, 'license'), QBCore.Functions.GetIdentifier(
-            player, 'discord'), QBCore.Functions.GetIdentifier(player, 'ip'), reason, banTime, GetPlayerName(source) })
+    local insertId = MySQL.insert.await(
+        'INSERT INTO bans (name, license, discord, ip, reason, expire, bannedby) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        {
+            GetPlayerName(player),
+            QBCore.Functions.GetIdentifier(player, 'license'),
+            QBCore.Functions.GetIdentifier(player, 'discord'),
+            QBCore.Functions.GetIdentifier(player, 'ip'),
+            reason,
+            expire,
+            GetPlayerName(source)
+        }
+    )
+
+    if not insertId then
+        QBCore.Functions.Notify(source, "Ban failed: database insert error (check oxmysql and bans table).", 'error', 7500)
+        return
+    end
 
     if time == 2147483647 then
         DropPlayer(player, locale("banned") .. '\n' .. locale("reason") .. reason .. locale("ban_perm"))
@@ -28,7 +58,9 @@ RegisterNetEvent('ps-adminmenu:server:BanPlayer', function(data, selectedData)
             '/' .. timeTable['month'] .. '/' .. timeTable['year'] .. ' ' .. timeTable['hour'] .. ':' .. timeTable['min'])
     end
 
-    QBCore.Functions.Notify(source, locale("playerbanned", player, banTime, reason), 'success', 7500)
+    if source and GetPlayerName(source) then
+        QBCore.Functions.Notify(source, locale("playerbanned", player, banTime, reason), 'success', 7500)
+    end
 end)
 
 -- Warn Player
