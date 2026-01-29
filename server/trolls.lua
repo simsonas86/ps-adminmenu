@@ -35,7 +35,6 @@ RegisterNetEvent('ps-adminmenu:server:DrunkPlayer', function(data, selectedData)
 
     local src = source
     local target = selectedData["Player"].value
-    local targetPed = GetPlayerPed(target)
     local Player = QBCore.Functions.GetPlayer(target)
 
     if not Player then

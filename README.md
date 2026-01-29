@@ -1,5 +1,5 @@
 # ps-adminmenu
-The Admin Menu crafted by [OK1ez](https://github.com/OK1ez) and our dedicated team is user-friendly and intuitive. We invite you to contribute by submitting new features through PRs. We're always eager to review and consider new features. Make sure you use our template when opening Issues or they will be auto closed.
+The Admin Menu crafted by [OK1ez](https://github.com/OK1ez) and our dedicated team is user-friendly and intuitive. We invite you to contribute by submitting new features through PRs. We're always eager to review and consider new features. Make sure you use our template when opening Issues, or they will be auto closed.
 
 ## Unofficial ESX Version
 Made by Avilchiis for the community, you can download it [here](https://github.com/avilchiis/ps-adminmenu). **WE DO NOT PROVIDE SUPPORT FOR ESX VERSION, DO NOT ASK YOU'LL BE IGNORED.**
@@ -103,7 +103,7 @@ Made by Avilchiis for the community, you can download it [here](https://github.c
 
 # Depedency
 1. [qb-core](https://github.com/qbcore-framework/qb-core) or [qbox_core](https://github.com/Qbox-project/qbx_core)
-3. [ox_lib](https://github.com/overextended/ox_lib)
+2. [ox_lib](https://github.com/overextended/ox_lib)
 
 # Installation
 1. Download the latest release.
@@ -128,7 +128,7 @@ add_principal identifier.fivem:565139 qbcore.mod # MonkeyWhisper
 1. Set up a Discord Webhook for the channel you want the logs to be.
 2. Add this to `qb-smallresource/server/logs.lua` -
 `['ps-adminmenu'] = 'discord webhook'`
-3. Replace the place holder with your webhook link.
+3. Replace the placeholder with your webhook link.
 
 # To Do
 * Rework the blips/names
@@ -159,7 +159,7 @@ We host some of the biggest FiveM servers in the industry such as Prodigy RP, Sm
 - Free transfer of files and setup  
 - Free Windows licenses  
 - Windows Remote Desktop  
-- 24/7 Support with ~30 min average ticket response  
+- 24/7 Support with ~30-min average ticket response  
 
 ---
 

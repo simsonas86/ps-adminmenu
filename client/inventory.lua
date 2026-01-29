@@ -1,5 +1,5 @@
 -- Open Inventory
-RegisterNetEvent('ps-adminmenu:client:openInventory', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:openInventory', function(_, selectedData)
     local player = selectedData["Player"].value
 
     if Config.Inventory == 'ox_inventory' then
@@ -10,7 +10,7 @@ RegisterNetEvent('ps-adminmenu:client:openInventory', function(data, selectedDat
 end)
 
 -- Open Stash
-RegisterNetEvent('ps-adminmenu:client:openStash', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:openStash', function(_, selectedData)
     local stash = selectedData["Stash"].value
 
     if Config.Inventory == 'ox_inventory' then
@@ -22,7 +22,7 @@ RegisterNetEvent('ps-adminmenu:client:openStash', function(data, selectedData)
 end)
 
 -- Open Trunk
-RegisterNetEvent('ps-adminmenu:client:openTrunk', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:openTrunk', function(_, selectedData)
     local vehiclePlate = selectedData["Plate"].value
 
     if Config.Inventory == 'ox_inventory' then

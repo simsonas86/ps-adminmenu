@@ -1,11 +1,11 @@
-local oldPos = nil
+local oldPos
 local spectateInfo = {
     toggled = false,
     target = 0,
     targetPed = 0
 }
 
-RegisterNetEvent('ps-adminmenu:requestSpectate', function(targetPed, target, name)
+RegisterNetEvent('ps-adminmenu:requestSpectate', function(targetPed, target, _)
     oldPos = GetEntityCoords(cache.ped)
     spectateInfo = {
         toggled = true,

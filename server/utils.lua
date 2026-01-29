@@ -15,7 +15,7 @@ end
 function CheckDataFromKey(key)
     local actions = Config.Actions[key]
     if actions then
-        local data = nil
+        local data
 
         if actions.event then
             data = actions

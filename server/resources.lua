@@ -1,6 +1,6 @@
 local resources = {}
 
-lib.callback.register('ps-adminmenu:callback:GetResources', function(source)
+lib.callback.register('ps-adminmenu:callback:GetResources', function(_)
     local totalResources = GetNumResources()
         
     resources = {}
@@ -25,7 +25,7 @@ lib.callback.register('ps-adminmenu:callback:GetResources', function(source)
 end)
 
 
-lib.callback.register('ps-adminmenu:callback:ChangeResourceState', function(source, data, perms)
+lib.callback.register('ps-adminmenu:callback:ChangeResourceState', function(source, data, _)
     print(json.encode(data))
     if not CheckPerms(source, Config.ResourcePerms) then return end
 

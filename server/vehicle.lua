@@ -143,7 +143,7 @@ RegisterNetEvent('ps-adminmenu:server:ChangePlate', function(newPlate, currentPl
     end
 end)
 
-lib.callback.register('ps-adminmenu:server:GetVehicleByPlate', function(source, plate)
+lib.callback.register('ps-adminmenu:server:GetVehicleByPlate', function(_, plate)
     local result = MySQL.query.await('SELECT vehicle FROM player_vehicles WHERE plate = ?', { plate })
     local veh = result[1] and result[1].vehicle or {}
     return veh

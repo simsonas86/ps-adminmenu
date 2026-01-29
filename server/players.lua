@@ -54,7 +54,7 @@ local function getPlayers()
     return players
 end
 
-lib.callback.register('ps-adminmenu:callback:GetPlayers', function(source)
+lib.callback.register('ps-adminmenu:callback:GetPlayers', function(_)
     return getPlayers()
 end)
 

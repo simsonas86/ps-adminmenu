@@ -138,7 +138,7 @@ RegisterNetEvent('ps-adminmenu:server:ReviveRadius', function(data)
     local pos = GetEntityCoords(ped)
     local players = QBCore.Functions.GetPlayers()
 
-    for k, v in pairs(players) do
+    for _, v in pairs(players) do
         local target = GetPlayerPed(v)
         local targetPos = GetEntityCoords(target)
         local dist = #(pos - targetPos)

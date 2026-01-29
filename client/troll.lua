@@ -19,7 +19,7 @@ RegisterNetEvent('ps-adminmenu:client:ExplodePlayer', function(damage)
 end)
 
 -- Play Sound
-RegisterNetEvent('ps-adminmenu:client:PlaySound', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:PlaySound', function(_, selectedData)
     local player = selectedData["Player"].value
     local sound = selectedData["Sound"].value
 

@@ -15,7 +15,7 @@ RegisterNetEvent('ps-adminmenu:client:TeleportToPlayer', function(coords)
 end)
 
 -- Teleport to coords
-RegisterNetEvent('ps-adminmenu:client:TeleportToCoords', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:TeleportToCoords', function(_, selectedData)
     local coordsStr = selectedData["Coords"].value
     local x, y, z, heading
 
@@ -40,7 +40,7 @@ RegisterNetEvent('ps-adminmenu:client:TeleportToCoords', function(data, selected
 end)
 
 -- Teleport to Locaton
-RegisterNetEvent('ps-adminmenu:client:TeleportToLocation', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:TeleportToLocation', function(_, selectedData)
     local coords = selectedData["Location"].value
 
     lastCoords = GetEntityCoords(cache.ped)
@@ -48,7 +48,7 @@ RegisterNetEvent('ps-adminmenu:client:TeleportToLocation', function(data, select
 end)
 
 -- Teleport back
-RegisterNetEvent('ps-adminmenu:client:TeleportBack', function(data)
+RegisterNetEvent('ps-adminmenu:client:TeleportBack', function(_)
     if lastCoords then
         local coords = GetEntityCoords(cache.ped)
         teleport(lastCoords.x, lastCoords.y, lastCoords.z)
