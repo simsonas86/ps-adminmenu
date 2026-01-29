@@ -2,8 +2,8 @@ local ShowBlips = false
 local ShowNames = false
 local NetCheck1 = false
 local NetCheck2 = false
-local Blip = nil
-local Tag = nil
+local Blip
+local Tag
 local currentPlayers = {}
 
 -- Function to remove all names and Blips
@@ -143,18 +143,18 @@ local function preparePlayers()
 end
 
 -- Toggle Blips and Names events
-RegisterNetEvent('ps-adminmenu:client:toggleBlips', function(data)
+RegisterNetEvent('ps-adminmenu:client:toggleBlips', function(_)
     if not ShowBlips then preparePlayers() end
     ToggleBlipsAndNames(true)
 end)
 
-RegisterNetEvent('ps-adminmenu:client:toggleNames', function(data)
+RegisterNetEvent('ps-adminmenu:client:toggleNames', function(_)
     if not ShowNames then preparePlayers() end
     ToggleBlipsAndNames(false)
 end)
 
 -- Mute Player
-RegisterNetEvent("ps-adminmenu:client:MutePlayer", function(data, selectedData)
+RegisterNetEvent("ps-adminmenu:client:MutePlayer", function(_, selectedData)
     local playerId = selectedData["Player"].value
     if not playerId then return end
     exports["pma-voice"]:toggleMutePlayer(playerId)
@@ -171,6 +171,6 @@ CreateThread(function()
 end)
 
 -- Remove Stress
-RegisterNetEvent('ps-adminmenu:client:removeStress', function(data)
+RegisterNetEvent('ps-adminmenu:client:removeStress', function(_)
     TriggerServerEvent('hud:server:RelieveStress', 100)
 end)

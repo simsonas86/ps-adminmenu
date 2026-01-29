@@ -24,7 +24,7 @@ RegisterNetEvent('ps-adminmenu:client:Admincar', function(data)
 end)
 
 -- Spawn Vehicle
-RegisterNetEvent('ps-adminmenu:client:SpawnVehicle', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:SpawnVehicle', function(_, selectedData)
     local selectedVehicle = selectedData["Vehicle"].value
     local hash = GetHashKey(selectedVehicle)
 
@@ -52,7 +52,7 @@ RegisterNetEvent('ps-adminmenu:client:SpawnVehicle', function(data, selectedData
 end)
 
 -- Refuel Vehicle
-RegisterNetEvent('ps-adminmenu:client:RefuelVehicle', function(data)
+RegisterNetEvent('ps-adminmenu:client:RefuelVehicle', function(_)
     if cache.vehicle then
         if Config.Fuel == "ox_fuel" then
             Entity(cache.vehicle).state.fuel = 100.0
@@ -66,7 +66,7 @@ RegisterNetEvent('ps-adminmenu:client:RefuelVehicle', function(data)
 end)
 
 -- Change plate
-RegisterNetEvent('ps-adminmenu:client:ChangePlate', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:ChangePlate', function(_, selectedData)
     local plate = selectedData["Plate"].value
 
     if string.len(plate) > 8 then
@@ -120,7 +120,7 @@ local function UpdateVehicleMenu()
     end
 end
 
-RegisterNetEvent('ps-adminmenu:client:ToggleVehDevMenu', function(data)
+RegisterNetEvent('ps-adminmenu:client:ToggleVehDevMenu', function(_)
     if not cache.vehicle then return end
 
     VEHICLE_DEV_MODE = not VEHICLE_DEV_MODE
@@ -146,7 +146,7 @@ local function UpgradePerformance(vehicle)
 end
 
 
-RegisterNetEvent('ps-adminmenu:client:maxmodVehicle', function(data)
+RegisterNetEvent('ps-adminmenu:client:maxmodVehicle', function(_)
     if cache.vehicle then
         UpgradePerformance(cache.vehicle)
     else
@@ -156,7 +156,7 @@ end)
 
 -- Spawn Personal vehicles
 
-RegisterNetEvent("ps-adminmenu:client:SpawnPersonalVehicle", function(data, selectedData)
+RegisterNetEvent("ps-adminmenu:client:SpawnPersonalVehicle", function(_, selectedData)
     local plate = selectedData['VehiclePlate'].value
     local ped = PlayerPedId()
     local coords = GetEntityCoords(ped)

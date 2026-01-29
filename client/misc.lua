@@ -1,13 +1,13 @@
 -- Toggles Invincibility
 local visible = true
-RegisterNetEvent('ps-adminmenu:client:ToggleInvisible', function(data)
+RegisterNetEvent('ps-adminmenu:client:ToggleInvisible', function(_)
     visible = not visible
     SetEntityVisible(cache.ped, visible, 0)
 end)
 
 -- God Mode
 local godmode = false
-RegisterNetEvent('ps-adminmenu:client:ToggleGodmode', function(data)
+RegisterNetEvent('ps-adminmenu:client:ToggleGodmode', function(_)
     godmode = not godmode
 
     if godmode then
@@ -71,7 +71,7 @@ end)
 
 -- Infinite Ammo
 local InfiniteAmmo = false
-RegisterNetEvent('ps-adminmenu:client:setInfiniteAmmo', function(data)
+RegisterNetEvent('ps-adminmenu:client:setInfiniteAmmo', function(_)
     InfiniteAmmo = not InfiniteAmmo
 
     if GetAmmoInPedWeapon(cache.ped, cache.weapon) < 6 then
@@ -108,7 +108,7 @@ local function showCoordsMenu()
     end
 end
 
-RegisterNetEvent('ps-adminmenu:client:ToggleCoords', function(data)
+RegisterNetEvent('ps-adminmenu:client:ToggleCoords', function(_)
     showCoords = not showCoords
 
     if showCoords then
@@ -117,7 +117,7 @@ RegisterNetEvent('ps-adminmenu:client:ToggleCoords', function(data)
 end)
 
 -- Set Ammo
-RegisterNetEvent('ps-adminmenu:client:SetAmmo', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:SetAmmo', function(_, selectedData)
     local ammo = selectedData["Ammo Amount"].value
     local weapon = GetSelectedPedWeapon(cache.ped)
 
@@ -162,7 +162,7 @@ local toogleAdmin = lib.addKeybind({
     name = 'toogleAdmin',
     description = locale("command_admin_desc"),
     defaultKey = Config.AdminKey,
-    onPressed = function(self)
+    onPressed = function(_)
         ExecuteCommand('admin')
     end
 })
@@ -176,7 +176,7 @@ local toogleNoclip = lib.addKeybind({
     name = 'toogleNoclip',
     description = locale("command_noclip_desc"),
     defaultKey = Config.NoclipKey,
-    onPressed = function(self)
+    onPressed = function(_)
         ExecuteCommand('nc')
     end
 })

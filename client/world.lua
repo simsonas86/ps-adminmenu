@@ -1,5 +1,5 @@
 -- Changes the time
-RegisterNetEvent('ps-adminmenu:client:ChangeTime', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:ChangeTime', function(_, selectedData)
     local time = selectedData["Time Events"].value
 
     if not time then return end
@@ -8,16 +8,16 @@ RegisterNetEvent('ps-adminmenu:client:ChangeTime', function(data, selectedData)
 end)
 
 -- Changes the weather
-RegisterNetEvent('ps-adminmenu:client:ChangeWeather', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:ChangeWeather', function(_, selectedData)
     local weather = selectedData["Weather"].value
 
     TriggerServerEvent('qb-weathersync:server:setWeather', weather)
 end)
 
-RegisterNetEvent('ps-adminmenu:client:copyToClipboard', function(data, selectedData)
+RegisterNetEvent('ps-adminmenu:client:copyToClipboard', function(_, selectedData)
     local dropdown = selectedData["Copy Coords"].value
     local ped = PlayerPedId()
-    local string = nil
+    local string
     if dropdown == 'vector2' then
         local coords = GetEntityCoords(ped)
         local x = ps.decimalRound(coords.x, 2)
