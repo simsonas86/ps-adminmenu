@@ -11,13 +11,13 @@ RegisterNetEvent('ps-adminmenu:client:ToggleGodmode', function(data)
     godmode = not godmode
 
     if godmode then
-        QBCore.Functions.Notify(locale("godmode", "enabled"), 'primary')
+        ps.notify(locale("godmode", "enabled"), 'primary')
         while godmode do
             Wait(0)
             SetPlayerInvincible(cache.playerId, true)
         end
         SetPlayerInvincible(cache.playerId, false)
-        QBCore.Functions.Notify(locale("godmode", "disabled"), 'primary')
+        ps.notify(locale("godmode", "disabled"), 'primary')
     end
 end)
 
@@ -123,9 +123,9 @@ RegisterNetEvent('ps-adminmenu:client:SetAmmo', function(data, selectedData)
 
     if weapon ~= nil then
         SetPedAmmo(cache.ped, weapon, ammo)
-        QBCore.Functions.Notify(locale("set_wepaon_ammo", tostring(ammo)), 'success')
+        ps.notify(locale("set_wepaon_ammo", tostring(ammo)), 'success')
     else
-        QBCore.Functions.Notify(locale("no_weapon"), 'error')
+        ps.notify(locale("no_weapon"), 'error')
     end
 end)
 
@@ -138,9 +138,9 @@ RegisterNetEvent('ps-adminmenu:client:SetAmmoCommand', function()
     local ammo = 999
     if weapon ~= nil then
         SetPedAmmo(cache.ped, weapon, ammo)
-        QBCore.Functions.Notify(locale("set_wepaon_ammo", tostring(ammo)), 'success')
+        ps.notify(locale("set_wepaon_ammo", tostring(ammo)), 'success')
     else
-        QBCore.Functions.Notify(locale("no_weapon"), 'error')
+        ps.notify(locale("no_weapon"), 'error')
     end
 end)
 
@@ -154,7 +154,7 @@ RegisterNetEvent('ps-adminmenu:client:ToggleDev', function(dataKey)
     TriggerEvent('ps-adminmenu:client:ToggleCoords', dataKey)  -- toggle Coords
     TriggerEvent('ps-adminmenu:client:ToggleGodmode', dataKey) -- Godmode
 
-    QBCore.Functions.Notify(locale("toggle_dev"), 'success')
+    ps.notify(locale("toggle_dev"), 'success')
 end)
 
 -- Key Bindings

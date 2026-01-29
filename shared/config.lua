@@ -1,4 +1,5 @@
 Config = Config or {}
+ps = exports.ps_lib:init()
 
 Config.Core = "qb-core"        -- "qb-core" or "qbx_core"
 Config.Fuel = "ps-fuel"        -- "ps-fuel", "LegacyFuel", "ox_fuel"

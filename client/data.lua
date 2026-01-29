@@ -4,6 +4,7 @@ local PedList = require "data.ped"
 local function GetVehicles()
     local vehicles = {}
 
+    --TODO: Add a way to access vehicles from ps_lib
     for _, v in pairs(QBCore.Shared.Vehicles) do
         vehicles[#vehicles + 1] = { label = v.name, value = v.model }
     end
@@ -27,6 +28,7 @@ local function GetItems()
     end
 
     if Config.Inventory == "qb-inventory" then
+        --TODO: Add a way to access items from ps_lib
         local ItemsData = QBCore.Shared.Items
 
         for name, v in pairs(ItemsData) do

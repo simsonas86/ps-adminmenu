@@ -20,33 +20,33 @@ RegisterNetEvent('ps-adminmenu:client:copyToClipboard', function(data, selectedD
     local string = nil
     if dropdown == 'vector2' then
         local coords = GetEntityCoords(ped)
-        local x = QBCore.Shared.Round(coords.x, 2)
-        local y = QBCore.Shared.Round(coords.y, 2)
+        local x = ps.decimalRound(coords.x, 2)
+        local y = ps.decimalRound(coords.y, 2)
         string = "vector2(".. x ..", ".. y ..")"
-        QBCore.Functions.Notify(locale("copy_vector2"), 'success')
+        ps.notify(locale("copy_vector2"), 'success')
     elseif dropdown == 'vector3' then
         local coords = GetEntityCoords(ped)
-        local x = QBCore.Shared.Round(coords.x, 2)
-        local y = QBCore.Shared.Round(coords.y, 2)
-        local z = QBCore.Shared.Round(coords.z, 2)
+        local x = ps.decimalRound(coords.x, 2)
+        local y = ps.decimalRound(coords.y, 2)
+        local z = ps.decimalRound(coords.z, 2)
         string = "vector3(".. x ..", ".. y ..", ".. z ..")"
-        QBCore.Functions.Notify(locale("copy_vector3"), 'success')
+        ps.notify(locale("copy_vector3"), 'success')
     elseif dropdown == 'vector4' then
         local coords = GetEntityCoords(ped)
-        local x = QBCore.Shared.Round(coords.x, 2)
-        local y = QBCore.Shared.Round(coords.y, 2)
-        local z = QBCore.Shared.Round(coords.z, 2)
+        local x = ps.decimalRound(coords.x, 2)
+        local y = ps.decimalRound(coords.y, 2)
+        local z = ps.decimalRound(coords.z, 2)
         local heading = GetEntityHeading(ped)
-        local h = QBCore.Shared.Round(heading, 2)
+        local h = ps.decimalRound(heading, 2)
         string = "vector4(".. x ..", ".. y ..", ".. z ..", ".. h ..")"
-        QBCore.Functions.Notify(locale("copy_vector4"), 'success')
+        ps.notify(locale("copy_vector4"), 'success')
     elseif dropdown == 'heading' then
         local heading = GetEntityHeading(ped)
-        local h = QBCore.Shared.Round(heading, 2)
+        local h = ps.decimalRound(heading, 2)
         string = h
-        QBCore.Functions.Notify(locale("copy_heading"), 'success')
+        ps.notify(locale("copy_heading"), 'success')
     elseif string == nil then 
-        QBCore.Functions.Notify(locale("empty_input"), 'error')
+        ps.notify(locale("empty_input"), 'error')
     end
 
     lib.setClipboard(string)
