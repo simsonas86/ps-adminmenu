@@ -1,10 +1,8 @@
-<script>
+<script lang="ts">
 	import { RESOURCE } from '@store/server'
 	import { SendNUI } from '@utils/SendNUI'
 
-	export let resource
-	export let icon
-	export let state
+	let { resource, icon, state } = $props();
 
 	async function changeState() {
 		event.stopPropagation();
@@ -15,7 +13,7 @@
 
 <button
 	class="w-[3vh] h-[3vh] rounded-[0.5vh] bg-secondary hover:bg-primary"
-	on:click={changeState}
+	onclick={changeState}
 >
-	<i class={icon} />
+	<i class={icon}></i>
 </button>

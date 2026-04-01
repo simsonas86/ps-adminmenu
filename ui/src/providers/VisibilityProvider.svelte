@@ -4,8 +4,13 @@
 	import { onMount } from 'svelte'
 	import { BROWSER_MODE, MENU_WIDE, VISIBILITY } from '../store/stores'
 	import BackdropFix from './BackdropFix.svelte'
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
 
-	let isVisible: boolean
+	let { children }: Props = $props();
+
+	let isVisible: boolean = $state()
 	let isBrowser: boolean
 
 	BROWSER_MODE.subscribe((browser: boolean) => {
@@ -47,8 +52,8 @@
 </script>
 
 {#if isVisible}
-	<main class="w-screen h-screen flex justify-end items-center {!$MENU_WIDE ? " " : "justify-center"}">
-		<slot />
+	<main class="w-screen h-screen flex justify-end items-center ">
+		{@render children?.()}
 	</main>
 	<!-- <BackdropFix /> -->
 {/if}

@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 	import { onMount } from "svelte"
 
-    export let data
+    let { data } = $props();
 
-    let favorite = localStorage.getItem(`favorite-${data}`) === 'true';
+    let favorite = $state(localStorage.getItem(`favorite-${data}`) === 'true');
 
     const toggleFavorite = () => {
         event.stopPropagation();
@@ -19,6 +19,6 @@
 
 <button 
     class="{favorite ? 'fas' : 'far'} fa-star"
-    on:click={toggleFavorite}
+    onclick={toggleFavorite}
 >
 </button>

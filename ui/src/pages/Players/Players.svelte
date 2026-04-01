@@ -10,19 +10,23 @@
 	import Modal from '@components/Modal.svelte'
 	import Input from '@pages/Actions/components/Input.svelte'
 
-	let search = ''
-	let loading = false
-	let banPlayer = false
-	let kickPlayer = false
+	let search = $state('')
+	let loading = $state(true)
+	let banPlayer = $state(false)
+	let kickPlayer = $state(false)
+
+	$inspect(loading)
 
 	onMount(async () => {
 		loading = true
 		const players = await SendNUI('getPlayers')
-		PLAYER.set(players)
-		loading = false
+		if (players) {
+			PLAYER.set(players)
+			loading = false
+		}
 	})
 
-	let selectedDataArray = {}
+	let selectedDataArray = $state({})
 
 	function SelectData(selectedData) {
 		// console.log('selected', selectedData)
@@ -116,7 +120,7 @@
 						hover:before:opacity-100 hover:after:opacity-100
 						"
 						data-tip="Kick Player"
-						on:click={() => (kickPlayer = true)}
+						onclick={() => (kickPlayer = true)}
 					>
 						<i class="fas fa-user-minus"></i>
 					</button>
@@ -148,7 +152,7 @@
 						hover:before:opacity-100 hover:after:opacity-100
 						"
 						data-tip="Ban Player"
-						on:click={() => (banPlayer = true)}
+						onclick={() => (banPlayer = true)}
 					>
 						<i class="fas fa-ban"></i>
 					</button>
@@ -180,7 +184,7 @@
 						hover:before:opacity-100 hover:after:opacity-100
 						"
 						data-tip="Teleport To Player"
-						on:click={() =>
+						onclick={() =>
 							SendNUI('clickButton', {
 								data: 'teleportToPlayer',
 								selectedData: {
@@ -220,7 +224,7 @@
 						hover:before:opacity-100 hover:after:opacity-100
 						"
 						data-tip="Bring Player"
-						on:click={() =>
+						onclick={() =>
 							SendNUI('clickButton', {
 								data: 'bringPlayer',
 								selectedData: {
@@ -260,7 +264,7 @@
 						hover:before:opacity-100 hover:after:opacity-100
 						"
 						data-tip="Revive Player"
-						on:click={() =>
+						onclick={() =>
 							SendNUI('clickButton', {
 								data: 'revivePlayer',
 								selectedData: {
@@ -300,7 +304,7 @@
 						hover:before:opacity-100 hover:after:opacity-100
 						"
 						data-tip="Spectate Player"
-						on:click={() =>
+						onclick={() =>
 							SendNUI('clickButton', {
 								data: 'spectate_player',
 								selectedData: {
@@ -369,7 +373,7 @@
 							<div class="ml-auto h-full flex items-center">
 								<button
 									class="bg-secondary px-[1vh] py-[0.5vh] rounded-[0.5vh] border border-primary"
-									on:click={() =>
+									onclick={() =>
 										SendNUI('clickButton', {
 											data: 'spawnPersonalVehicle',
 											selectedData: {
@@ -396,7 +400,7 @@
 			<p class="font-medium text-[1.8vh]">Ban {$SELECTED_PLAYER.name}</p>
 			<button
 				class="hover:text-accent"
-				on:click={() => (banPlayer = false)}
+				onclick={() => (banPlayer = false)}
 			>
 				<i class="fas fa-xmark"></i>
 			</button>
@@ -421,7 +425,7 @@
 		/>
 		<button
 			class="h-[3.8vh] px-[1.5vh] rounded-[0.5vh] bg-secondary hover:bg-opacity-90 border-[0.1vh] border-primary"
-			on:click={() => {
+			onclick={() => {
 				// console.log('Time: ', selectedDataArray['Duration'].value)
 				// console.log('reason: ', selectedDataArray['Reason'].value)
 				SendNUI('clickButton', {
@@ -451,7 +455,7 @@
 			<p class="font-medium text-[1.8vh]">Kick {$SELECTED_PLAYER.name}</p>
 			<button
 				class="hover:text-accent"
-				on:click={() => (kickPlayer = false)}
+				onclick={() => (kickPlayer = false)}
 			>
 				<i class="fas fa-xmark"></i>
 			</button>
@@ -466,7 +470,7 @@
 		/>
 		<button
 			class="h-[3.8vh] px-[1.5vh] rounded-[0.5vh] bg-secondary hover:bg-opacity-90 border-[0.1vh] border-primary"
-			on:click={() => {
+			onclick={() => {
 				SendNUI('clickButton', {
 					data: 'kickPlayer',
 					selectedData: {

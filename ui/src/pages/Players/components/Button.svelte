@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 	import { PLAYER_VEHICLES, SELECTED_PLAYER } from '@store/players'
 	import { MENU_WIDE } from '@store/stores'
 	import { SendNUI } from '@utils/SendNUI'
 
-	export let player
+	let { player } = $props();
 
 	async function SelectPlayer(player) {
 		SELECTED_PLAYER.set(player)
@@ -15,12 +15,12 @@
 
 <button
 	class="h-[4.5vh] w-full flex items-center px-[1.5vh] rounded-[0.5vh] bg-tertiary hover:bg-opacity-90"
-	on:click={() => {
+	onclick={() => {
 		SelectPlayer(player)
 	}}
 >
 	<div class="w-full flex items-center justify-between gap-[1vh]">
 		<p>{player.id} - {player.name}</p>
-		<i class="fas fa-angle-right" />
+		<i class="fas fa-angle-right"></i>
 	</div>
 </button>

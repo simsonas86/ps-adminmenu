@@ -1,7 +1,7 @@
 <script>
     import { debugData } from '../utils/debugData';
 
-	let show = false;
+	let show = $state(false);
     //EXAMPLE
 
 	const debugActions = [
@@ -415,7 +415,7 @@
 <div class="absolute top-0 z-[1000] font-medium uppercase m-4">
 	<button class="bg-neutral-800 p-3
 	3 font-medium uppercase"
-		on:click={() => {
+		onclick={() => {
 			show = !show;
 		}}
 	>
@@ -428,7 +428,7 @@
 			<p class="h-full w-full mr-2">{option.component}</p>
 			{#each option.actions as action}
 			<button class="bg-neutral-600 p-2"
-				on:click={() => {
+				onclick={() => {
 
 					if (action.custom == true) {
 						action.customFunction();

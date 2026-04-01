@@ -1,5 +1,5 @@
-<script>
-	export let label
+<script lang="ts">
+    let { label } = $props();
 </script>
 
 <button class="w-full flex justify-between rounded-[0.5vh] bg-tertiary items-center">

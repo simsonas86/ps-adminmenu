@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import DropdownComponent from '@components/DropdownComponent.svelte'
 	import { SendNUI } from '@utils/SendNUI'
 	import { slide } from 'svelte/transition'
@@ -6,10 +6,9 @@
 	import Favorite from './Favorite.svelte'
 	import Input from './Input.svelte'
 
-	export let data
-	export let id
+	let { data = $bindable(), id } = $props();
 
-	let dropdownActive
+	let dropdownActive = $state()
 
 	let selectedDataArray = {}
 
@@ -41,13 +40,13 @@
 >
 	<button
 		class="w-full h-[4.5vh] flex items-center justify-between px-[1.5vh]"
-		on:click={() => (dropdownActive = !dropdownActive)}
+		onclick={() => (dropdownActive = !dropdownActive)}
 	>
 		<div class="flex items-center gap-[1vh]">
 			<Favorite data={id} />
 			<p>{data.label}</p>
 		</div>
-		<i class="fas fa-angle-{dropdownActive ? 'down' : 'right'}" />
+		<i class="fas fa-angle-{dropdownActive ? 'down' : 'right'}"></i>
 	</button>
 
 	{#if dropdownActive}
@@ -69,7 +68,7 @@
 					{:else if i.option === 'button'}
 						<button
 							class="h-[3.8vh] px-[1.5vh] rounded-[0.5vh] bg-secondary hover:bg-opacity-90 border-[0.1vh] border-primary"
-							on:click={() => {
+							onclick={() => {
 								sendData(i.event, i.type)
 							}}
 						>

@@ -1,7 +1,7 @@
 <script>
 	import { fly } from 'svelte/transition'
 	import { MENU_WIDE, ACTIVE_PAGE } from '@store/stores'
-	import Sidebar from './Sidebar/Sidebar.svelte'
+	import Sidebar from './Sidebar.svelte'
 
 	import Actions from '@pages/Actions/Actions.svelte'
 	import Server from '@pages/Server/Server.svelte'
@@ -11,7 +11,7 @@
 </script>
 
 <div
-	class="h-[85vh] flex rounded-[0.5vh] bg-primary {!$MENU_WIDE ? 'w-[40vh] mr-[5vh] ' : 'w-[106vh]'}" transition:fly={{ x: 100 }}
+	class="h-[85vh] transition-[width] duration-300 flex rounded-[0.5vh] bg-primary {!$MENU_WIDE ? 'w-[40vh] mr-[5vh] ' : 'w-[106vh] mr-[5vh]'}" transition:fly={{ x: 100 }}
 >
 	<Sidebar />
 	<div class="h-full flex {!$MENU_WIDE ? 'w-[33vh]' : 'w-[99vh]'}">

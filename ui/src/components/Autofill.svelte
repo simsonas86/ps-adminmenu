@@ -1,19 +1,21 @@
-<script>
+<script lang="ts">
 	import { GANG_DATA, ITEM_DATA, JOB_DATA, LOCATION_DATA, VEHICLE_DATA, PED_LIST } from "@store/data"
 	import { PLAYER } from "@store/players"
 	import { SendNUI } from "@utils/SendNUI"
 	import { onMount } from "svelte"
 	import { slide } from "svelte/transition"
 
-    export let action
-    export let label_title
-    export let data
 
-    export let selectedData;
+    let {
+        action,
+        label_title,
+        data,
+        selectedData
+    } = $props();
 
-    let search = ""
-    let searchInputFocused = false;
-    let DataDropdownActive = false;
+    let search = $state("")
+    let searchInputFocused = $state(false);
+    let DataDropdownActive = $state(false);
 
     function selectData(label, value) {
         search = label;
@@ -56,8 +58,8 @@
         <input
             type="text"
             placeholder={label_title}
-            on:focus={handleInputFocus}
-            on:blur={handleInputBlur}
+            onfocus={handleInputFocus}
+            onblur={handleInputBlur}
             bind:value={search}
             class="h-full w-[90%] bg-transparent"
         />
@@ -67,17 +69,16 @@
     {#if DataDropdownActive}
         <button
             class="w-full rounded-b-[0.5vh] flex flex-col max-h-[15vh] overflow-y-auto border-t border-primary scroll-visible"
-            on:mouseenter={() => { searchInputFocused = true }}
-            on:blur={() => { searchInputFocused = false }}
+            onmouseenter={() => { searchInputFocused = true }}
+            onblur={() => { searchInputFocused = false }}
             transition:slide={{ duration: 150 }}
         >
             {#if data === "players"}
                 {#each $PLAYER.filter(i => i.name.toLowerCase().includes(search.toLowerCase())) as i}
                     <button
                         class="w-full p-[0.5vh] flex justify-start text-start px-[1vh] gap-[0.5vh] hover:bg-tertiary"
-                        on:click={() =>
-                            selectData(i.name, i.id)
-                        }
+                        onclick={() =>
+                            selectData(i.name, i.id)}
                     >
                         <p>{i.name}</p>
                         <p>({i.id})</p>
@@ -87,7 +88,7 @@
                 {#each $VEHICLE_DATA.filter(i => i.label.toLowerCase().includes(search.toLowerCase()) || i.value.toLowerCase().includes(search.toLowerCase())) as i}
                     <button
                         class="w-full p-[0.5vh] flex justify-start text-start px-[1vh] gap-[0.5vh] hover:bg-tertiary"
-                        on:click={() => selectData(i.label, i.value)}
+                        onclick={() => selectData(i.label, i.value)}
                     >
                         <p>{i.label}</p>
                         <p>({i.value})</p>
@@ -97,7 +98,7 @@
                 {#each $ITEM_DATA.filter(i => i.label.toLowerCase().includes(search.toLowerCase()) || i.value.toLowerCase().includes(search.toLowerCase())) as i}
                     <button
                         class="w-full p-[0.5vh] flex justify-start text-start px-[1vh] gap-[0.5vh] hover:bg-tertiary"
-                        on:click={() => selectData(i.label, i.value)}
+                        onclick={() => selectData(i.label, i.value)}
                     >
                         <p>{i.label}</p>
                         <p>({i.value})</p>
@@ -107,7 +108,7 @@
                 {#each $JOB_DATA.filter(i => i.label.toLowerCase().includes(search.toLowerCase()) || i.value.toLowerCase().includes(search.toLowerCase())) as i}
                     <button
                         class="w-full p-[0.5vh] flex justify-start text-start px-[1vh] gap-[0.5vh] hover:bg-tertiary"
-                        on:click={() => selectData(i.label, i.value)}
+                        onclick={() => selectData(i.label, i.value)}
                     >
                         <p>{i.label}</p>
                         <p>({i.value})</p>
@@ -117,7 +118,7 @@
                 {#each $GANG_DATA.filter(i => i.label.toLowerCase().includes(search.toLowerCase()) || i.value.toLowerCase().includes(search.toLowerCase())) as i}
                     <button
                         class="w-full p-[0.5vh] flex justify-start text-start px-[1vh] gap-[0.5vh] hover:bg-tertiary"
-                        on:click={() => selectData(i.label, i.value)}
+                        onclick={() => selectData(i.label, i.value)}
                     >
                         <p>{i.label}</p>
                         <p>({i.value})</p>
@@ -127,7 +128,7 @@
                 {#each $LOCATION_DATA.filter(i => i.label.toLowerCase().includes(search.toLowerCase())) as i}
                     <button
                         class="w-full p-[0.5vh] flex justify-start text-start px-[1vh] gap-[0.5vh] hover:bg-tertiary"
-                        on:click={() => selectData(i.label, i.value)}
+                        onclick={() => selectData(i.label, i.value)}
                     >
                         <p>{i.label}</p>
                     </button>
@@ -136,7 +137,7 @@
                 {#each $PED_LIST.filter(i => i.label.toLowerCase().includes(search.toLowerCase()) || i.value.toLowerCase().includes(search.toLowerCase())) as i}
                     <button
                         class="w-full p-[0.5vh] flex justify-start text-start px-[1vh] gap-[0.5vh] hover:bg-tertiary"
-                        on:click={() => selectData(i.label, i.value)}
+                        onclick={() => selectData(i.label, i.value)}
                     >
                         <p>{i.label}</p>
                         <p>({i.value})</p>
@@ -146,7 +147,7 @@
                 {#each data.filter(i => i.label.toLowerCase().includes(search.toLowerCase()) || i.value.toLowerCase().includes(search.toLowerCase())) as i}
                     <button
                         class="w-full p-[0.5vh] flex justify-start text-start px-[1vh] gap-[0.5vh] hover:bg-tertiary"
-                        on:click={() => selectData(i.label, i.value)}
+                        onclick={() => selectData(i.label, i.value)}
                     >
                         <p>{i.label}</p>
                         <!-- <p>({i.value})</p> -->

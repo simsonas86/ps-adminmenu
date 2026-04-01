@@ -5,17 +5,17 @@
 	import Header from '@components/Header.svelte'
 	import CommandsCard from './components/CommandsCard.svelte'
 
-	let search = ''
-	let visibleCount = 50
+	let search = $state('')
+	let visibleCount = $state(50)
 	const pageSize = 50
 
-	$: sortedCommands = $COMMANDS
+	let sortedCommands = $derived($COMMANDS
 		? $COMMANDS.slice().sort((a, b) => a.name.localeCompare(b.name))
-		: []
-	$: filteredCommands = sortedCommands.filter((commands) =>
+		: [])
+	let filteredCommands = $derived(sortedCommands.filter((commands) =>
 		commands.name.toLowerCase().includes(search.toLowerCase())
-	)
-	$: visibleCommands = filteredCommands.slice(0, visibleCount)
+	))
+	let visibleCommands = $derived(filteredCommands.slice(0, visibleCount))
 
 	function handleScroll(event) {
 		const el = event.currentTarget
@@ -38,7 +38,7 @@
 	/>
 	<div
 		class="w-full h-[84%] flex flex-col gap-[1vh] mt-[1vh] overflow-auto"
-		on:scroll={handleScroll}
+		onscroll={handleScroll}
 	>
 		{#if $COMMANDS}
 			{#if filteredCommands.length === 0}

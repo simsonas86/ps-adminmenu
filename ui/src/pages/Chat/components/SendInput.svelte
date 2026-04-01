@@ -2,14 +2,13 @@
 	import { MENU_WIDE } from '@store/stores'
 	import { SendNUI } from '@utils/SendNUI'
 
-	let message = "";
+	let message = $state("");
 
 	function sendMessage() {
         if (!message.trim()) return;
         SendNUI("SendMessage", {
             message: message,
         });
-		// console.log("Message sent", message)
         message = "";
 		setTimeout(() => {
             scrollToBottom();
@@ -30,7 +29,7 @@
 	<input
 		type="text"
 		placeholder="Your message here"
-		on:keydown={(e) => {
+		onkeydown={(e) => {
 			if (e.key === "Enter") {
 				sendMessage();
 			}
@@ -40,8 +39,8 @@
 	/>
 	<button
 		class="h-full w-[5vh] rounded-r-[0.5vh] hover:bg-secondary"
-		on:click={sendMessage}
+		onclick={sendMessage}
 	>
-		<i class="fas fa-paper-plane text-[1.5vh]" />
+		<i class="fas fa-paper-plane text-[1.5vh]"></i>
 	</button>
 </div>

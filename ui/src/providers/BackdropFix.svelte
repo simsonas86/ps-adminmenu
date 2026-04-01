@@ -168,7 +168,7 @@
       return gameView;
     };
   
-    let canvasRef: HTMLCanvasElement;
+    let canvasRef: HTMLCanvasElement = $state();
   
     onMount(() => {
       createGameView(canvasRef);
@@ -180,7 +180,7 @@
       bind:this={canvasRef}
       width={window.innerWidth}
       height={window.innerHeight}
-    />
+></canvas>
   </div>
   
   <style>

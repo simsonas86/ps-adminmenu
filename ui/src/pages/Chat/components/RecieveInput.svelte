@@ -1,5 +1,4 @@
 <script>
-	import { MENU_WIDE } from '@store/stores'
 	import { Message, Messages } from '@store/staffchat'
     import { PLAYER, PLAYER_DATA } from "@store/players";
     import { timeAgo } from "@utils/timeAgo"

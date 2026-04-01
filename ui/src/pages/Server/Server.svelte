@@ -5,7 +5,7 @@
 	import Header from '@components/Header.svelte'
 	import ResourceCard from './components/ResourceCard.svelte'
 
-	let search = ''
+	let search = $state('')
 	
 	let SortedResources = $RESOURCE ? $RESOURCE.slice().sort((a, b) => a.name.localeCompare(b.name)) : []
 </script>

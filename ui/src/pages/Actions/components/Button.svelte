@@ -1,10 +1,9 @@
-<script>
+<script lang="ts">
 	import { SendNUI } from '@utils/SendNUI'
 	import Favorite from './Favorite.svelte'
 	import { onMount } from 'svelte'
 
-	export let data
-	export let id
+	let { data, id } = $props();
 
 	onMount(() => {
 		// console.log("button", data)
@@ -13,7 +12,7 @@
 
 <button
 	class="min-h-[4.5vh] w-full flex items-center px-[1.5vh] rounded-[0.5vh] bg-tertiary hover:bg-opacity-90"
-	on:click={() => {
+	onclick={() => {
 		// console.log(data.event)
 		SendNUI('clickButton', {
 			data: id,

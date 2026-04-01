@@ -1,6 +1,5 @@
-<script>
-    export let data
-    export let selectedData
+<script lang="ts">
+    let { data, selectedData } = $props();
 
     function selectData(label, value) {
         selectedData({
@@ -10,7 +9,7 @@
         });
     }
 
-    let input = ""
+    let input = $state("")
 
 </script>
 
@@ -21,9 +20,9 @@
             type="text" 
             placeholder={data.label} 
             bind:value={input}
-            on:input={e => input = e.target.value}
-            on:blur={() => selectData(data.label, input)}
-            on:click={() => selectData(data.label, input)}
+            oninput={e => input = e.target.value}
+            onblur={() => selectData(data.label, input)}
+            onclick={() => selectData(data.label, input)}
             class="h-full w-[90%] bg-transparent" 
         />
     </div>

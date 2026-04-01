@@ -1,11 +1,25 @@
-<script>
+<script lang="ts">
     import {createEventDispatcher} from 'svelte';
 
     const dispatch = createEventDispatcher();
 
-    export let dropdownValues, label, selectedValue, id="array-dd", insideLabel = "";
+  interface Props {
+    dropdownValues: any;
+    label: any;
+    selectedValue: any;
+    id?: string;
+    insideLabel?: string;
+  }
 
-    let isOpen = false;
+  let {
+    dropdownValues,
+    label,
+    selectedValue = $bindable(),
+    id = "array-dd",
+    insideLabel = ""
+  }: Props = $props();
+
+    let isOpen = $state(false);
 
     function toggleDropdown() {
         isOpen = !isOpen;
@@ -32,7 +46,7 @@
         <label for="dd">{label}: </label>
     {/if}
     <div class="dropdown-wrapper">
-        <div class="select-wrapper" id="select" on:click={toggleDropdown}>
+        <div class="select-wrapper" id="select" onclick={toggleDropdown}>
             {#if selectedValue.trim() !== ''}
                 <div class="select-wrapper-selected-value">
                     {#if insideLabel.trim() !== ""}
@@ -53,7 +67,7 @@
                     </div>
                 {:else}
                     {#each dropdownValues as ddValue}
-                        <div class="option-child" on:click={() => {selectDropdownValue(ddValue)}}>
+                        <div class="option-child" onclick={() => {selectDropdownValue(ddValue)}}>
                             <p>
                                 {ddValue}
                                 {#if selectedValue === ddValue}
